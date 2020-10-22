@@ -52,7 +52,7 @@ void AllInFoAboutDisk(LPCTSTR d)
 
 	BOOL b = GetVolumeInformation(d, NameBuf, MAX_PATH, &SerialNumber, &MaxLengthFile, &FileSystemOptions, NameFileSystem, MAX_PATH);
 	if (b) {
-		cout << "Имя раздела: ";
+		cout << "Имя указанного диска: ";
 		for (int i = 0; i < MAX_PATH; i++)
 		{
 			if (NameBuf[i] != '\0')
@@ -61,7 +61,7 @@ void AllInFoAboutDisk(LPCTSTR d)
 				break;
 		}
 		cout << endl;
-		cout << "Файловая система: ";
+		cout << "Название файловой системы: ";
 		for (int i = 0; i < MAX_PATH; i++)
 		{
 			if (NameFileSystem[i] != '\0')
@@ -71,8 +71,21 @@ void AllInFoAboutDisk(LPCTSTR d)
 		}
 		cout << endl;
 		cout << "Максимальная длина файла: " << MaxLengthFile << endl;
-		cout << "Опции файловой системы: " << FileSystemOptions << endl;
-		cout << "Серийный номер раздела: " << SerialNumber << endl;
+		cout << "Флаги файловой системы: " << FileSystemOptions << endl;
+		cout << "Серийный номер диска: " << SerialNumber << endl;
+		cout << "File System Flag: " << endl;
+		if (FileSystemOptions & FILE_CASE_PRESERVED_NAMES) cout << "   FILE_CASE_PRESERVED_NAMES" << endl;
+		if (FileSystemOptions & FS_CASE_SENSITIVE) cout << "   FS_CASE_SENSITIVE" << endl;
+		if (FileSystemOptions & FS_UNICODE_STORED_ON_DISK) cout << "   FS_UNICODE_STORED_ON_DISK" << endl;
+		if (FileSystemOptions & FS_PERSISTENT_ACLS) cout << "   FS_PERSISTENT_ACLS" << endl;
+		if (FileSystemOptions & FS_FILE_COMPRESSION) cout << "   FS_FILE_COMPRESSION" << endl;
+		if (FileSystemOptions & FS_VOL_IS_COMPRESSED) cout << "   FS_VOL_IS_COMPRESSED" << endl;
+		if (FileSystemOptions & FILE_NAMED_STREAMS) cout << "   FILE_NAMED_STREAMS" << endl;
+		if (FileSystemOptions & FILE_SUPPORTS_ENCRYPTION) cout << "   FILE_SUPPORTS_ENCRYPTION" << endl;
+		if (FileSystemOptions & FILE_SUPPORTS_OBJECT_IDS) cout << "   FILE_SUPPORTS_OBJECT_IDS" << endl;
+		if (FileSystemOptions & FILE_SUPPORTS_REPARSE_POINTS) cout << "   FILE_SUPPORTS_REPARSE_POINTS" << endl;
+		if (FileSystemOptions & FILE_SUPPORTS_SPARSE_FILES) cout << "   FILE_SUPPORTS_SPARSE_FILES	" << endl;
+		if (FileSystemOptions & FILE_VOLUME_QUOTAS) cout << "   FILE_VOLUME_QUOTAS" << endl;
 	}
 	else
 		cout << "\n Возникла ошибка: " << GetLastError << endl;
